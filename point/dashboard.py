@@ -104,7 +104,7 @@ class Dashboard(QWidget):
 
     def apply_filter(self):
         try:
-            # Print initial DataFrame
+            # ecrire la DataFrame initiale
             print("Initial DataFrame:\n", self.df.head())
 
             selected_months = [int(item.text()) for item in self.month_listwidget.selectedItems()]
@@ -118,32 +118,32 @@ class Dashboard(QWidget):
             print("Selected names:", selected_names)
 
             if 'date' in self.df.columns:
-                # Filter by selected month
+                # filter par mois
                 if selected_months:
                     month_filtered_df = self.df[self.df['date'].dt.month.isin(selected_months)]
                 else:
                     month_filtered_df = self.df
 
-                # Filter by selected name
+                # filter par noms
                 if "Tous les noms" not in selected_names:
                     self.filtered_df = month_filtered_df[month_filtered_df['nom'].isin(selected_names)]
                 else:
                     self.filtered_df = month_filtered_df
 
-                # Clear the current QListWidget items
+                # effacer les éléments actuels du QListWidget
                 self.list_widget.clear()
 
-                # Populate the QListWidget with filtered data
+                # remplissez le QListWidget avec des données filtrées
                 for _, row in self.filtered_df.iterrows():
-                    item_text = f"{row['nom']} - {row['date']}"  # Customize this to display what you want
+                    item_text = f"{row['nom']} - {row['date']}"  
                     list_item = QListWidgetItem(item_text)
                     self.list_widget.addItem(list_item)
 
                 self.list_widget.clear()
 
-                # Populate the QListWidget with filtered data
+                # emplissez le QListWidget avec des données filtrées
                 for _, row in self.filtered_df.iterrows():
-                    item_text = f"{row['nom']} - {row['date']}"  # Customize this to display what you want
+                    item_text = f"{row['nom']} - {row['date']}"  
                     list_item = QListWidgetItem(item_text)
                     self.list_widget.addItem(list_item)
 
@@ -197,7 +197,7 @@ class Dashboard(QWidget):
         self.ax[1, 0].set_ylabel('Moyenne Travail (heures)')
         self.ax[1, 0].set_title('Moyenne Travail par Jour de la Semaine')
 
-        # ajouter des infobulles interactives uniquement pour le graphique en barres
+        # ajouter des infobulles interactives  pour le graphique en barres
         mplcursors.cursor(bars, hover=True).connect(
             "add", lambda sel: sel.annotation.set_text(f'{grouped.index[sel.index]}: {grouped.values[sel.index]:.1f} heures')
         )
@@ -226,7 +226,7 @@ class Dashboard(QWidget):
         self.ax[1, 1].set_title('Travail au Fil du Temps')
         self.ax[1, 1].xaxis.set_major_formatter(DateFormatter('%d-%m-%Y'))
 
-        # Tracer le total du travail par mois
+        # tracer le total du travail par mois
         monthly_totals = self.filtered_df.groupby(self.filtered_df['date'].dt.to_period('M')).agg({'travail': 'mean'})
         monthly_totals.index = monthly_totals.index.to_timestamp()
 
@@ -237,12 +237,12 @@ class Dashboard(QWidget):
         self.ax[2, 0].set_ylabel('Moyenne Travail (heures)')
         self.ax[2, 0].set_title('Moyenne Travail par Mois')
 
-        # Ajouter des infobulles interactives pour le graphique en barres
+        # ajouter des infobulles interactives pour le graphique en barres
         mplcursors.cursor(bars, hover=True).connect(
             "add", lambda sel: sel.annotation.set_text(f'{monthly_totals.index[sel.index].strftime("%Y-%m")}: {monthly_totals["travail"].iloc[sel.index]:.1f} heures')
         )
 
-        # Tracer le nombre de jours de travail par mois
+        # tracer le nombre de jours de travail par mois
         days_of_travail = monthly_totals['travail'] / 8  # Convertir les heures en jours
 
         self.ax[2, 1].clear()
@@ -286,13 +286,13 @@ class Dashboard(QWidget):
             top_5 = employee_totals.head(5)
             bottom_5 = employee_totals.tail(5)
 
-            # Combine top 5 and bottom 5 employees into one DataFrame
+            # combinez les 5 meilleurs et les 5 derniers employés dans un seul DataFrame
             top_bottom_employees = pd.concat([top_5, bottom_5])
             
-            # Clear the previous plot
+            # effacer l'intrigue précédente
             self.ax[0, 0].clear()
 
-            # Create a table
+            # créer un tableau
             cell_text = []
             row_labels = []
             for i, (employee, work) in enumerate(top_bottom_employees.items()):
@@ -302,15 +302,15 @@ class Dashboard(QWidget):
                     row_labels.append(f'Bottom {i-4}')
                 cell_text.append([employee, f'{work:.2f}'])
 
-            # Add the table to the axes
+            # ajouter le tableau aux axes
             table = self.ax[0, 0].table(cellText=cell_text,
                                         colLabels=["Employé", "Travail (heures)"],
                                         rowLabels=row_labels,
                                         loc='center')
 
             table.auto_set_font_size(False)
-            table.set_fontsize(14)  # Increase the font size
-            table.scale(1.2, 3)  # Increase the vertical scale to make the table longer
+            table.set_fontsize(14)
+            table.scale(1.2, 3)  
             self.ax[0, 0].axis('off')
             self.ax[0, 0].set_title('Top et Bottom 5 Employés')
 
