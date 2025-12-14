@@ -32,10 +32,10 @@ https://github.com/mell0wO/DataPulse/new/raw/main/demo.mp4
 ## 🖥 Frontend Preview
 
 ### Dashboard
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](./dashboard.png)
 
 ### Employee Records
-![Accueil](./screenshots/accueil.png)
+![Accueil](.accueil.png)
 
 ---
 
