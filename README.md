@@ -35,7 +35,7 @@ https://github.com/mell0wO/DataPulse/new/raw/main/demo.mp4
 ![Dashboard](./dashboard.png)
 
 ### Employee Records
-![Accueil](.accueil.png)
+![Accueil](./accueil.png)
 
 ---
 
