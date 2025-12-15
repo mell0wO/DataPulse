@@ -7,7 +7,10 @@ It allows HR/admins to **upload attendance data from Excel files**, compute **wo
 
 ## 🎥 Demo Video
 
-![demo](./demo.mp4)
+<video controls>
+  <source src="./demo.mp4" type="video/mp4">
+</video>
+
 
 ---
 
