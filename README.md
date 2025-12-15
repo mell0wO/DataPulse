@@ -6,10 +6,7 @@ It allows HR/admins to **upload attendance data from Excel files**, compute **wo
 ---
 
 ## 🎥 Demo Video
-
-<video controls>
-  <source src="./demo.mp4" type="video/mp4">
-</video>
+](https://github.com/mell0wO/DataPulse/new/raw/main/demo.mp4)
 
 
 ---
