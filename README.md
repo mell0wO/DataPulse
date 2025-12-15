@@ -1,4 +1,4 @@
-# Employee Attendance & KPI Dashboard
+# DataPulse
 
 This project is a **full-stack employee attendance tracking system** with a **Django REST API backend** and an **Angular frontend**.  
 It allows HR/admins to **upload attendance data from Excel files**, compute **working hours**, and visualize **KPI reports** (best employee, worst employee, weekly trends, realized/remaining hours, etc.) on a modern dashboard.
